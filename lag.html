@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Lag - GraveNews Weekly</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px gray;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .good {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .bad {
+            background-color: #FF5733;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Check Lag</h1>
+        <p>Welcome to GraveNews Weekly's new feature! You can now check the real-time connection between you and our website. We measure lag frequencies using a method that accurately determines your network stability.</p>
+        <p>The system will automatically track your connection and display a genuine result based on real-time data.</p>
+        <div id="lagStatus" class="status">Checking connection...</div>
+    </div><script>
+    function checkLag() {
+        let startTime = Date.now();
+        fetch("/").then(() => {
+            let lagTime = Date.now() - startTime;
+            localStorage.setItem("lagTime", lagTime);
+            updateStatus(lagTime);
+        }).catch(() => {
+            updateStatus(-1);
+        });
+    }
+
+    function updateStatus(lagTime) {
+        let statusDiv = document.getElementById("lagStatus");
+        if (lagTime === -1 || lagTime > 300) {
+            statusDiv.textContent = "Alert: Connection is not good enough!";
+            statusDiv.className = "status bad";
+        } else {
+            statusDiv.textContent = "Your connection to the website is working fine!";
+            statusDiv.className = "status good";
+        }
+    }
+
+    setInterval(checkLag, 5000);
+    checkLag();
+</script>
+
+</body>
+</html>
