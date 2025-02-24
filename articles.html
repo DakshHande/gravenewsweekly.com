@@ -50,13 +50,17 @@
         .article-image {
             display: block;
             margin: 20px auto;
-            width: 80%;
-            height: auto;
+            width: 90%; /* Wider placeholder */
+            height: 200px; /* Shorter height */
             border: 2px solid black;
             background-color: #D3D3D3;
             text-align: center;
-            line-height: 200px;
-            color: #555;
+            overflow: hidden; /* Ensures the image doesn't overflow */
+        }
+        .article-image img {
+            width: 100%; /* Ensures the image covers the width */
+            height: 100%; /* Ensures the image covers the height */
+            object-fit: cover; /* Ensures the image fills the placeholder without distortion */
         }
     </style>
 </head>
@@ -68,7 +72,9 @@
     <div class="content" id="articles">
         <!-- Article 1 -->
         <h2>Magnus Carlsen's Recent Endeavors</h2>
-        <img class="article-image" src="https://ibb.co/JWN6yWcf" alt="Magnus Carlsen">
+        <div class="article-image">
+            <a href="https://imgbb.com/"><img src="https://i.ibb.co/TVGHTBH/images-1.jpg" alt="images-1" /></a>
+        </div>
         <p>In February 2025, Magnus Carlsen continued to assert his dominance in the chess world by clinching the title at the Chessable Masters, the inaugural event of the annual Champions Chess Tour. In a compelling final, Carlsen faced off against Hikaru Nakamura, securing victory in two consecutive matches. The semi-final against India's Arjun Erigaisi was particularly intense, with Carlsen narrowly escaping defeat in an Armageddon tie-break game. Despite some endgame challenges, Carlsen's superior skill ensured his triumph, leading to his qualification for the $1.5 million Saudi Esports World Cup. </p>
         <p>Beyond the chessboard, Carlsen made headlines for his unique approach to philanthropy. During the World Rapid and Blitz Chess Championship in December, he was fined $200 for breaching the dress code by wearing jeans. Instead of contesting the fine, Carlsen chose to withdraw from the tournament. Demonstrating his commitment to charitable causes, he decided to auction the controversial jeans, with all proceeds directed to Big Brothers Big Sisters of America. The funds raised aim to support chess clinics, community events, and mentorship programs for youth, underscoring Carlsen's dedication to leveraging his platform for positive societal impact. </p>
         <p>In a recent appearance on the Joe Rogan Experience podcast, Carlsen delved into various topics, including his passion for chess and his perspectives on emerging talents. He lauded Indian prodigy Gukesh Dommaraju for his relentless dedication, noting, "Gukesh is studying his a** off." However, Carlsen also pointed out areas for growth, mentioning that while Gukesh excels in classical formats, he still has room to improve in rapid and blitz disciplines. </p>
@@ -77,7 +83,9 @@
 
         <!-- Article 2 -->
         <h2>Rising Star: Gukesh Dommaraju's Historic Win</h2>
-        <img class="article-image" src="https://ibb.co/9343NF7V" alt="Gukesh Dommaraju">
+        <div class="article-image">
+            <a href="https://imgbb.com/"><img src="https://i.ibb.co/bjS1K5gq/images-2.jpg" alt="images-2" /></a>
+        </div>
         <p>In January 2025, Indian chess prodigy Gukesh Dommaraju made history by becoming the youngest player to win the Tata Steel Chess Tournament. At just 18 years old, Gukesh outperformed a field of elite grandmasters, including reigning world champion Ding Liren and former champion Magnus Carlsen. His victory has been hailed as a turning point in modern chess, signaling the rise of a new generation of players.</p>
         <p>Gukesh's performance was marked by his aggressive yet calculated style, which has drawn comparisons to a young Garry Kasparov. His ability to handle pressure in critical moments, particularly in his decisive win against Carlsen in the penultimate round, has cemented his reputation as a future world championship contender.</p>
         <p>In an interview following his victory, Gukesh credited his success to his rigorous training regimen and the support of his family and coaches. He also expressed his ambition to challenge for the world championship title in the coming years, stating, "This is just the beginning. I want to be the best in the world."</p>
@@ -85,7 +93,9 @@
 
         <!-- Article 3 -->
         <h2>Chess in the Metaverse: A New Frontier</h2>
-        <img class="article-image" src="https://ibb.co/dsXZ3Cdt" alt="Chess in the Metaverse">
+        <div class="article-image">
+            <a href="https://ibb.co/MyJ4x1F2"><img src="https://i.ibb.co/dsHqwp8W/images-3.jpg" alt="images-3" /></a>
+        </div>
         <p>In 2025, the chess world embraced the metaverse with the launch of "MetaChess," a virtual reality platform that allows players to compete in immersive 3D environments. Developed by a team of chess enthusiasts and tech innovators, MetaChess aims to revolutionize the way the game is played and experienced.</p>
         <p>The platform features lifelike avatars, interactive chessboards, and customizable settings that allow players to recreate famous historical matches or design their own unique setups. Players can also participate in virtual tournaments, attend live-streamed events, and interact with other chess enthusiasts from around the world.</p>
         <p>Early adopters of MetaChess have praised its innovative approach to the game, with many noting that it adds a new dimension to chess strategy and engagement. Grandmaster Hikaru Nakamura, who has been actively promoting the platform, described it as "the future of chess."</p>
