@@ -1,23 +1,40 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check Lag - GraveNews Weekly</title>
     <style>
         body {
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            font-family: "Courier New", monospace;
             text-align: center;
+            color: black;
+        }
+        h1 {
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid black;
+            font-size: 24px;
+            font-weight: bold;
+            width: fit-content;
+            margin: 20px auto;
+            animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
         }
         .container {
             width: 80%;
             margin: 0 auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0px 0px 10px gray;
-        }
-        h1 {
-            font-size: 24px;
+            text-align: left;
+            border: 2px solid black;
+            padding: 15px;
+            background-color: white;
         }
         .status {
             margin-top: 20px;
@@ -34,40 +51,65 @@
             background-color: #FF5733;
             color: white;
         }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
+    <h1>Check Lag - GraveNews Weekly</h1>
     <div class="container">
         <h1>Check Lag</h1>
         <p>Welcome to GraveNews Weekly's new feature! You can now check the real-time connection between you and our website. We measure lag frequencies using a method that accurately determines your network stability.</p>
         <p>The system will automatically track your connection and display a genuine result based on real-time data.</p>
         <div id="lagStatus" class="status">Checking connection...</div>
-    </div><script>
-    function checkLag() {
-        let startTime = Date.now();
-        fetch("/").then(() => {
-            let lagTime = Date.now() - startTime;
-            localStorage.setItem("lagTime", lagTime);
-            updateStatus(lagTime);
-        }).catch(() => {
-            updateStatus(-1);
-        });
-    }
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 GraveNews Chess Weekly. All rights reserved.</p>
+    </div>
+    <script>
+        // Function to check lag
+        function checkLag() {
+            let startTime = Date.now();
 
-    function updateStatus(lagTime) {
-        let statusDiv = document.getElementById("lagStatus");
-        if (lagTime === -1 || lagTime > 300) {
-            statusDiv.textContent = "Alert: Connection is not good enough!";
-            statusDiv.className = "status bad";
-        } else {
-            statusDiv.textContent = "Your connection to the website is working fine!";
-            statusDiv.className = "status good";
+            // Fetch request with timeout
+            const timeout = 5000; // 5 seconds timeout
+            const controller = new AbortController();
+            const signal = controller.signal;
+
+            setTimeout(() => controller.abort(), timeout);
+
+            fetch("/", { signal })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    let lagTime = Date.now() - startTime;
+                    localStorage.setItem("lagTime", lagTime.toString()); // Securely store lag time
+                    updateStatus(lagTime);
+                })
+                .catch(error => {
+                    console.error("Error checking lag:", error);
+                    updateStatus(-1); // Indicates a connection issue
+                });
         }
-    }
 
-    setInterval(checkLag, 5000);
-    checkLag();
-</script>
+        // Function to update status
+        function updateStatus(lagTime) {
+            let statusDiv = document.getElementById("lagStatus");
+            if (lagTime === -1 || lagTime > 300) {
+                statusDiv.textContent = "Alert: Connection is not good enough!";
+                statusDiv.className = "status bad";
+            } else {
+                statusDiv.textContent = `Your connection to the website is working fine! (Lag: ${lagTime}ms)`;
+                statusDiv.className = "status good";
+            }
+        }
 
+        // Check lag every 5 seconds
+        setInterval(checkLag, 5000);
+        checkLag(); // Initial check
+    </script>
 </body>
 </html>
